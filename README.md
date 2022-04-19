@@ -47,5 +47,5 @@
       ![image](https://user-images.githubusercontent.com/33450535/163919538-471f924e-f596-46e2-9dab-a49c4c18ae18.png)
       
       
-    * 5단계. nachos/proj2 디렉토리로 이동하여, 소스 컴파일 (이하, Proj1 에서의 컴파일과 동일함.)
+    * 6단계. nachos/proj2 디렉토리로 이동하여, 소스 컴파일 (이하, Proj1 에서의 컴파일과 동일함.)
     ![image](https://user-images.githubusercontent.com/33450535/163918905-1f23f02b-fc5d-4b39-b759-cfb6c69e55a7.png)
