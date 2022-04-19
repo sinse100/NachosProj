@@ -21,7 +21,7 @@
     * 4단계. 현재 디렉토리 유지한 채, ```../bin/nachos``` 명령 통해 proj1 에 해당(nachos/threads 디렉토리 파일들)하는 Nachos 가상 머신 작동
     ![image](https://user-images.githubusercontent.com/33450535/163917235-ea276259-91e7-4483-b003-143443a19a0c.png)
     
-- - -
+
 + ### 아래는 Proj2 에서의 Nachos 소스 컴파일을 다룹니다.
 
 
@@ -49,3 +49,6 @@
       
     * 6단계. nachos/proj2 디렉토리로 이동하여, 소스 컴파일 (이하, Proj1 에서의 컴파일과 동일함.)
     ![image](https://user-images.githubusercontent.com/33450535/163918905-1f23f02b-fc5d-4b39-b759-cfb6c69e55a7.png)
+
+
+- - -
