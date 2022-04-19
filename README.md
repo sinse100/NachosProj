@@ -66,3 +66,7 @@
 
 + ### 1번 과제
   + ```creat, open, read, write, close, unlink``` 의 파일 시스템 호출을 구현하시오. 이 시스템 호출들에 대한 명세 및 의미는 ‘test’ 디렉토리의 syscall.h에 명세 되어있습니다. 또한, ```UserProcess.java``` 에 halt 시스템 호출이 구현되어있으니 이를 참고하세요. 단, 명심할 것이 여러분들이 파일 시스템을 구현하는 건 아닙니다. 이미 구현되어있는 Nachos 파일 시스템에서, 유저 프로세스가, 파일 시스템에 접근할 수 있도록 시스템 호출을 구현하는 것입니다
+  + 일단 UserKernel.java 파일을 살펴봅시다. 이 UserKernel 클래스에 대한 설명을 보자면, 다수개의 유저 레벨프로세스를 지원할 수 있는 커널이라고 합니다. 즉, 쉽게 말하면, 멀티프로그래밍이 가능한 Nachos 커널이라는 것을 의미합니다. 일단, Proj1에서 구현한 ThreadedKernel을 상속하여, UserKernel이 구현된 것을 보아하니, 멀티 쓰레딩을 지원하는 걸로 보입니다.
+    ![noname01](https://user-images.githubusercontent.com/33450535/163922336-5f0413bf-f535-4397-b891-621067db25fc.jpg)
+
+  
