@@ -52,3 +52,13 @@
 
 
 - - -
+
+## Proj2 설명
++ ### 배경 지식
+  + 수강생 여러분들이 수정할 프로젝트 코드는 ```userprog``` 디렉토리의 다음 두 파일입니다
+    - ```UserKernel.java``` : Multiprogramming을 지원하는 Kernel
+    - ```UserProcess.java``` : 유저 레벨 프로세스(주소공간)를 관리하며, 유저 프로그램을 가상 메모리로 로드   
+  + 위의 두 파일 뿐만 아니라, 아래의 파일들도 꼭 읽어보시고 감을 잡으세요.
+    - ```userprog``` 디렉토리의 ```UThread.java, SynchConsole.java```
+    - ```machine``` 디렉토리의 ```Processor, FileSystem```
+  + ```test``` 디렉토리는 Nachos 가상머신에서 실행가능한 MIPS 프로그램들을 저장하고 있습니다.   
