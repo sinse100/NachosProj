@@ -62,3 +62,7 @@
     - ```userprog``` 디렉토리의 ```UThread.java, SynchConsole.java```
     - ```machine``` 디렉토리의 ```Processor, FileSystem```
   + ```test``` 디렉토리는 Nachos 가상머신에서 실행가능한 MIPS 프로그램들을 저장하고 있습니다.   
+
+
++ ### 1번 과제
+  + ```creat, open, read, write, close, unlink``` 의 파일 시스템 호출을 구현하시오. 이 시스템 호출들에 대한 명세 및 의미는 ‘test’ 디렉토리의 syscall.h에 명세 되어있습니다. 또한, ```UserProcess.java``` 에 halt 시스템 호출이 구현되어있으니 이를 참고하세요. 단, 명심할 것이 여러분들이 파일 시스템을 구현하는 건 아닙니다. 이미 구현되어있는 Nachos 파일 시스템에서, 유저 프로세스가, 파일 시스템에 접근할 수 있도록 시스템 호출을 구현하는 것입니다
