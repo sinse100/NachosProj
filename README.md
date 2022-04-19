@@ -62,7 +62,7 @@
   + Alarm 클래스의 구현을 마치세요. 하나의 스레드는 waitUntil(long x)를 호출하여, 스스로 실행을 멈출수 있습니다(현재시간 + 인자로 주어진 x). 이 waitUntil(long x) 메소드와, 타이머 인터럽트 핸들러를 완성시키세요.
 
 + ### 2번 과제
-+ ```KThread.java``` 의 ```Thread Join``` 기법을 위한, ```KThread.join```을 구현하세요. 여기서, ```KTthread.join()``` 함수는 Thread가 종료 될때까지 기다리는 함수입니다. Thread에 대해 ```join()```이 호출되었다면, 다른 ```join()``` 호출은 무시하여도 됩니다. 
+   + ```KThread.java``` 의 ```Thread Join``` 기법을 위한, ```KThread.join```을 구현하세요. 여기서, ```KTthread.join()``` 함수는 Thread가 종료 될때까지 기다리는 함수입니다. Thread에 대해 ```join()```이 호출되었다면, 다른 ```join()``` 호출은 무시하여도 됩니다. 
 ```ex) thread 1,2,3이 있을 때, 1에서 2.join()이 호출 된다면 a는 b가 완료 될 때까지 기다린다.```
 만약 실행 중인 3이 있었다면 3은 2.join()의 영향을 받지 않고 실행된다.
 
