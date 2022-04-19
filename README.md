@@ -12,6 +12,8 @@
     ![image](https://user-images.githubusercontent.com/33450535/163917034-bf3fd7f0-16e9-4287-b04e-80454c3d838a.png)
     * 4단계. 현재 디렉토리 유지한 채, '../bin/nachos' 명령 통해 proj1 에 해당(nachos/threads 디렉토리 파일들)하는 Nachos 가상 머신 작동
     ![image](https://user-images.githubusercontent.com/33450535/163917235-ea276259-91e7-4483-b003-143443a19a0c.png)
+    
+    
 + 아래는 Proj2 에서의 Nachos 소스 컴파일을 다룹니다.
     * 1단계. 해당 링크(https://cseweb.ucsd.edu/classes/fa16/cse120-a/projects/syscall-testing.html) 에서 Nachos 가상 머신 상에서 작동시킬 소스 다운로드
       + write1.c, write4.c, write10.c, snake.c ...
