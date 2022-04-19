@@ -1,6 +1,7 @@
 package nachos.threads;
 
 import nachos.machine.*;
+import java.util.Vector;
 import java.util.LinkedList;
 
 /**
@@ -14,83 +15,77 @@ import java.util.LinkedList;
  */
 public class Condition2 {
     /**
-	 * Allocate a new condition variable.
-	 *
-	 * @param	conditionLock	the lock associated with this condition
-	 *				variable. The current thread must hold this
-	 *				lock whenever it uses <tt>sleep()</tt>,
-	 *				<tt>wake()</tt>, or <tt>wakeAll()</tt>.
-	 */
+     * Allocate a new condition variable.
+     *
+     * @param	conditionLock	the lock associated with this condition
+     *				variable. The current thread must hold this
+     *				lock whenever it uses <tt>sleep()</tt>,
+     *				<tt>wake()</tt>, or <tt>wakeAll()</tt>.
+     */
+    public Condition2(Lock conditionLock) {
+	this.conditionLock = conditionLock;
+        CV_WaitThread_List = new Vector();  // init conditional waiting set!!
+    }
 
-	public Condition2(Lock conditionLock) {
-		this.conditionLock = conditionLock;
+    /**
+     * Atomically release the associated lock and go to sleep on this condition
+     * variable until another thread wakes it using <tt>wake()</tt>. The
+     * current thread must hold the associated lock. The thread will
+     * automatically reacquire the lock before <tt>sleep()</tt> returns.
+     */
+    public void sleep() {
+	Lib.assertTrue(conditionLock.isHeldByCurrentThread());
 
-		// waitQueue = new LinkedList<Lock>();
-		waitQueue = new LinkedList<KThread>();
-	}
+	conditionLock.release();
+ 
+        ////////////////////////////////////////////////////////////
+        boolean intStatus = Machine.interrupt().disable(); // to provide atomicity, must disable interrupt
+        CV_WaitThread_List.add((KThread)KThread.currentThread()); 
+        // add thread(caller of sleep) to Conditional Waiting set
+        KThread.currentThread().sleep();
+        Machine.interrupt().restore(intStatus);
+        //////////////////////////////////////////////////////////////
 
-	/**
-	 * Atomically release the associated lock and go to sleep on this condition
-	 * variable until another thread wakes it using <tt>wake()</tt>. The
-	 * current thread must hold the associated lock. The thread will
-	 * automatically reacquire the lock before <tt>sleep()</tt> returns.
-	 */
-	public void sleep() {
-		Lib.assertTrue(conditionLock.isHeldByCurrentThread());
-		
-		boolean status = Machine.interrupt().disable(); 
-		
-		conditionLock.release();
-		waitQueue.add(KThread.currentThread());
-		KThread.sleep();
-		conditionLock.acquire();
-		Machine.interrupt().restore(status);
-		
-//		Lock waiter = new Lock();
-//		waitQueue.add(waiter);
-//
-//		conditionLock.release();
-//		waiter.acquire();
-//		conditionLock.acquire();
-	}
+	conditionLock.acquire();
+    }
 
-	/**
-	 * Wake up at most one thread sleeping on this condition variable. The
-	 * current thread must hold the associated lock.
-	 */
-	public void wake() {
-		Lib.assertTrue(conditionLock.isHeldByCurrentThread());
-		
-		boolean status = Machine.interrupt().disable(); 
-		
-		if (!waitQueue.isEmpty()){
-			// ((Lock)waitQueue.removeFirst()).release();
-			(waitQueue.removeFirst()).ready();
-		}
-		
-		Machine.interrupt().restore(status);
-	}
+    /**
+     * Wake up at most one thread sleeping on this condition variable. The
+     * current thread must hold the associated lock.
+     */
+    public void wake() {
+	Lib.assertTrue(conditionLock.isHeldByCurrentThread());
 
-	/**
-	 * Wake up all threads sleeping on this condition variable. The current
-	 * thread must hold the associated lock.
-	 */
-	public void wakeAll() {
-		Lib.assertTrue(conditionLock.isHeldByCurrentThread());
-		
-		boolean status = Machine.interrupt().disable(); 
-		
-		while (!waitQueue.isEmpty()){
-			wake();
-		}
-		Machine.interrupt().restore(status);
+        boolean intStatus = Machine.interrupt().disable(); // to provide atomicity, must disable interrupt
+        if(CV_WaitThread_List.size() !=0) {                // FCFS Scheduling, ready most longedt waiting thread
+            ((KThread)CV_WaitThread_List.firstElement()).ready(); 
+            CV_WaitThread_List.removeElementAt(0);
         }
+         Machine.interrupt().restore(intStatus);           // enable interrupt again!!   
+    }
 
-        private static class InterlockTest {        
-                private static Lock lock;              // locker (Mutex)
-        	private static Condition2 cv;          // condition variable
+    /**
+     * Wake up all threads sleeping on this condition variable. The current
+     * thread must hold the associated lock.
+     */
+    public void wakeAll() {
+	Lib.assertTrue(conditionLock.isHeldByCurrentThread());
 
-        	private static class Interlocker implements Runnable {
+         while(CV_WaitThread_List.size()!=0)            // wake all threads in conditional waiting set!!!
+            wake();
+    }
+
+    private Lock conditionLock;      // lock
+    private Vector CV_WaitThread_List = null;   // conditional waiting set!!!
+
+
+    ///////////////////// This Class is for Testing ////////////////////////////
+ 
+    private static class InterlockTest {        
+        private static Lock lock;              // locker (Mutex)
+        private static Condition2 cv;          // condition variable
+
+        private static class Interlocker implements Runnable {
            public void run() {
               lock.acquire();                // get mutex of it(lock mutex is for sync of run method!!)
               for(int i=0; i<10;i++) {         
@@ -138,7 +133,7 @@ public class Condition2 {
               }
               lock.release();
            }
-      });
+         });
 
       KThread producer = new KThread(new Runnable() {
            public void run() {
@@ -151,7 +146,7 @@ public class Condition2 {
               empty.wake();
               lock.release();
            }
-      });
+         });
 
      consumer.setName("Consumer");
      producer.setName("Producer");
@@ -160,10 +155,4 @@ public class Condition2 {
      consumer.join();
      producer.join();
    }
-
-   private Lock conditionLock;
-	// private LinkedList<Lock> waitQueue;
-   private LinkedList<KThread> waitQueue;
 }
-
-    
