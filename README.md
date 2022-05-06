@@ -100,5 +100,5 @@
     ![image](https://user-images.githubusercontent.com/33450535/167139319-24054728-c114-44a7-b2e9-16e3b2f8dfab.png)
    + 현재 해당 오류 발생에 대한 원인을 찾고있는 중이며, 원인 및 해답을 찾는 동안, 새로운 Nachos 프로젝트 폴더를 다운받으시고, 아래와 같은 방법으로 프로젝트를 진행해주시면 되겠습니다.
       - proj1 의 경우, 리포지터리 상의 ```Alarm.java```, ```Condition2.java```, ```KThread.java```, ```ThreadedKernel.java``` 의 코드를 그대로, 복사 붙여넣기 해주시고 재 컴파일(make)
-      - proj2 의 경우, 리포지터리 상의  ```UThread.java```, ```SynchConsole.java```, ```UserKernel.java```, ```UserProcess.java``` 의 코드를 그대로, 복사 붙여넣기 해주시고 재 컴파일(make)
+      - proj2 의 경우, 리포지터리 상의 ```UserKernel.java```, ```UserProcess.java``` 의 코드를 그대로, 복사 붙여넣기 해주시고 재 컴파일(make)
 
