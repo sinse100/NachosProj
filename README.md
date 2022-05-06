@@ -98,5 +98,6 @@
 ## 'Cannot Find Symbol' 오류 발생
    + proj1 및 proj2 디렉토리에서 make 를 통한 컴파일 도중, 아래와 같은, ```Cannot Find Symbol``` 오류에 직면하실 수 있습니다.  
     ![image](https://user-images.githubusercontent.com/33450535/167139319-24054728-c114-44a7-b2e9-16e3b2f8dfab.png)
-   + ㅁㄴㅇㄹ
+   + 현재 해당 오류 발생에 대한 원인을 찾고있는 중이며, 원인 및 해답을 찾는 동안, 아래와 같은 방법으로 프로젝트를 진행해주시면 되겠습니다.
+      - ㅁㄴㅇㄻㅁㄴㅇㄹ 
 
