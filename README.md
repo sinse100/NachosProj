@@ -94,7 +94,13 @@
     
 + ### 2번 과제
   + 원래 Nachos 코드는 UniProgramming을 위해 설계되었습니다. 여러분들의 임무는, 다수의 User Level 프로세스들이 메모리에 한번에 올라올 수 있도록 Multiprogramming을 지원하는 기능을 넣는 것입니다. 여러분들은, 다수의 프로세스들의 주소공간이 겹치지 않도록, 페이지 단위로 각 프로세스에 메모리를 할당할 것입니다. 또한, 페이지 테이블을 추상화시킨 자료구조 ```pageTable```을 각각의 User 프로세스에서 사용하십시오. 이 전체적인 페이징을 통한 MultiProgramming을 가능케하기 위해서는 ```UserProcess``` 클래스의 ```loadSections()``` 메소드, ```readVirtualMemory()``` 메소드, ```writeVirtualMemory``` 메소드를 수정해주세요
-  + 2
+  + 2번 과제에 대한 Test 는, C 언어로 작성된 응용 프로그램들이 Nachos 상에서 정상적으로 작동하는지를 평가하는 방식으로 행해질 예정입니다.
+  + 1단계. 다음의 링크(https://cseweb.ucsd.edu/classes/fa16/cse120-a/projects/exec-testing.html, https://cseweb.ucsd.edu/classes/fa16/cse120-a/projects/syscall-testing.html)들에서 C 소스파일들을 모두 다운로드 받아주시고, Nachos 프로젝트 폴더의 test 디렉토리(```nachos/test```)로 옮겨주세요.
+  + 2단계. 이후, ```nachos/test``` 디렉토리에서 Makefile 을 찾아 TARGET 항목에, 저희가 다운로드한 C 소스들의 이름(확장자 제외)을 추가해주세요.
+  ![image](https://user-images.githubusercontent.com/33450535/167154276-c1267f5a-c3d9-4c55-b770-0a46cd2aeb5f.png)
+  + 3단계. ```nachos/test``` 상에서 make 통해 컴파일 진행해줍니다. (이로써, ```nachos/test``` 디렉토리의 C 소스파일들이 Mips 프로세서가 인식할 수 있는 .coff 확장자 파일로 컴파일 되었습니다.)
+  + 4단계. ```nachos/proj2``` 
+
 
 ## 'Cannot Find Symbol' 오류 발생
    + proj1 및 proj2 디렉토리에서 make 를 통한 컴파일 도중, 아래와 같은, ```Cannot Find Symbol``` 오류에 직면하실 수 있습니다.  
