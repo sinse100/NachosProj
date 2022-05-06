@@ -95,11 +95,22 @@
 + ### 2번 과제
   + 원래 Nachos 코드는 UniProgramming을 위해 설계되었습니다. 여러분들의 임무는, 다수의 User Level 프로세스들이 메모리에 한번에 올라올 수 있도록 Multiprogramming을 지원하는 기능을 넣는 것입니다. 여러분들은, 다수의 프로세스들의 주소공간이 겹치지 않도록, 페이지 단위로 각 프로세스에 메모리를 할당할 것입니다. 또한, 페이지 테이블을 추상화시킨 자료구조 ```pageTable```을 각각의 User 프로세스에서 사용하십시오. 이 전체적인 페이징을 통한 MultiProgramming을 가능케하기 위해서는 ```UserProcess``` 클래스의 ```loadSections()``` 메소드, ```readVirtualMemory()``` 메소드, ```writeVirtualMemory``` 메소드를 수정해주세요
   + 2번 과제에 대한 Test 는, C 언어로 작성된 응용 프로그램들이 Nachos 상에서 정상적으로 작동하는지를 평가하는 방식으로 행해질 예정입니다.
-  + 1단계. 다음의 링크(https://cseweb.ucsd.edu/classes/fa16/cse120-a/projects/exec-testing.html, https://cseweb.ucsd.edu/classes/fa16/cse120-a/projects/syscall-testing.html)들에서 C 소스파일들을 모두 다운로드 받아주시고, Nachos 프로젝트 폴더의 test 디렉토리(```nachos/test```)로 옮겨주세요.
-  + 2단계. 이후, ```nachos/test``` 디렉토리에서 Makefile 을 찾아 TARGET 항목에, 저희가 다운로드한 C 소스들의 이름(확장자 제외)을 추가해주세요.
-  ![image](https://user-images.githubusercontent.com/33450535/167154276-c1267f5a-c3d9-4c55-b770-0a46cd2aeb5f.png)
-  + 3단계. ```nachos/test``` 상에서 make 통해 컴파일 진행해줍니다. (이로써, ```nachos/test``` 디렉토리의 C 소스파일들이 Mips 프로세서가 인식할 수 있는 .coff 확장자 파일로 컴파일 되었습니다.)
-  + 4단계. ```nachos/proj2``` 
+  + proj2 디렉토리에서, ../bin/nachos 명령어와 함께, -x 옵션과 실행할 .coff 파일의 이름을 줌으로써, Nachos 가상 머신 상에서 특정 응용 프로그램을 작동시킬 수 있습니다.
+  ![image](https://user-images.githubusercontent.com/33450535/167155696-a08f3f58-1927-4381-8f23-f63a8a4d4cad.png)
+  + 다음은, 각각의 C 프로그램들을 Nachos 상에서 실행시켰을 때의 실행 화면입니다.
+    - write1.c (4줄에 걸쳐 문장을 출력합니다.)
+    ![image](https://user-images.githubusercontent.com/33450535/167155884-b9524ebd-dfdd-4cca-84f6-362bc8fd829b.png)
+    - write4.c (표준입력으로 입력을 받고, 엔터를 누르면, 입력 내용을 출력합니다.)
+    ![image](https://user-images.githubusercontent.com/33450535/167156078-523019af-2081-4849-8d07-adc0adb22d05.png)
+    - write10.c (```test``` 디렉토리에 write.out 파일을 생성하고, 아래와 같은 내용을 write 합니다.)
+    ![image](https://user-images.githubusercontent.com/33450535/167156606-f2011c2f-1f84-4ab5-80c1-da63c064a343.png)
+    - 기타, 다른 C 프로그램들에 대한 실행화면들은 생략하겠습니다.
+  + 또한-x 옵션과 함께, -d 옵션을 줄 수 있는데, 이는, Nachos 가상 머신 상에서 특정 응용 프로그램을 작동과정을 디버깅하여 특정 프로그램 실행 과정을 mips 어셈블리 명령어 수준에서 보여줍니다.
+    ![image](https://user-images.githubusercontent.com/33450535/167157271-c23eab05-d515-499b-9344-47bd9f600502.png)
+    - write1.c (4줄에 걸쳐 문장을 출력합니다. -d ma 옵션을 부가적으로 준 경우, 아래와 같이, 실행 과정을 MIPS 어셈블리 수준에서 보여줍니다.) 
+    ![image](https://user-images.githubusercontent.com/33450535/167157217-36c922bb-76a3-4fe3-b14b-83f5d8480628.png)
+ 
+ 
 
 
 ## 'Cannot Find Symbol' 오류 발생
