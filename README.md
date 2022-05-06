@@ -106,6 +106,7 @@
     ![image](https://user-images.githubusercontent.com/33450535/167156606-f2011c2f-1f84-4ab5-80c1-da63c064a343.png)
     - 기타, 다른 C 프로그램들에 대한 실행화면들은 생략하겠습니다.
   + 또한-x 옵션과 함께, -d 옵션을 줄 수 있는데, 이는, Nachos 가상 머신 상에서 특정 응용 프로그램을 작동과정을 디버깅하여 특정 프로그램 실행 과정을 mips 어셈블리 명령어 수준에서 보여줍니다.  
+  
     ![image](https://user-images.githubusercontent.com/33450535/167157271-c23eab05-d515-499b-9344-47bd9f600502.png)
     - write1.c (4줄에 걸쳐 문장을 출력합니다. -d ma 옵션을 부가적으로 준 경우, 아래와 같이, 실행 과정을 MIPS 어셈블리 수준에서 보여줍니다.) 
     ![image](https://user-images.githubusercontent.com/33450535/167157217-36c922bb-76a3-4fe3-b14b-83f5d8480628.png)
