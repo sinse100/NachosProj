@@ -96,6 +96,13 @@
   + 원래 Nachos 코드는 UniProgramming을 위해 설계되었습니다. 여러분들의 임무는, 다수의 User Level 프로세스들이 메모리에 한번에 올라올 수 있도록 Multiprogramming을 지원하는 기능을 넣는 것입니다. 여러분들은, 다수의 프로세스들의 주소공간이 겹치지 않도록, 페이지 단위로 각 프로세스에 메모리를 할당할 것입니다. 또한, 페이지 테이블을 추상화시킨 자료구조 ```pageTable```을 각각의 User 프로세스에서 사용하십시오. 이 전체적인 페이징을 통한 MultiProgramming을 가능케하기 위해서는 ```UserProcess``` 클래스의 ```loadSections()``` 메소드, ```readVirtualMemory()``` 메소드, ```writeVirtualMemory``` 메소드를 수정해주세요
 
 ## 'Cannot Find Symbol' 오류 발생
-  + ㅁㄴㅇㄻㄴㅇㄹ
+  + ```ubuntu@ip-172-31-55-254:~/NachosProj/proj1$ make
+javac -classpath . -d . -sourcepath ../.. -g ../threads/ThreadedKernel.java
+../threads/ThreadedKernel.java:8: error: cannot find symbol
+public class ThreadedKernel extends Kernel {
+                                    ^
+  symbol: class Kernel
+../threads/ThreadedKernel.java:75: error: cannot find symbol
+    public static Scheduler scheduler = null;```
 
   
