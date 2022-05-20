@@ -389,7 +389,8 @@ public class PriorityScheduler extends Scheduler {           // 우선순위 스
 		public void acquire(PriorityThreadQueue waitQueue) {
 			Lib.assertTrue(Machine.interrupt().disabled());
 			Lib.assertTrue(waitQueue.priorityQueue.isEmpty());          
-
+			
+			waitQueue.priorityQueue.remove(this);
 			waitQueue.dequeuedThread = this;                            // priorityQueue(waitQueue) 에서 막 제거된 KThread를, 현재 KThread(waitQueue 에 대한 접근을 허락받은 KThread) 로 설정 
 			this.addQueue(waitQueue);                                   // 현재 상태의 priorityQueue(waitQueue) 를, onQueues에 추가
 			this.calcEffectivePriority();                               // 현재 KThread 의 EP 를 재 계산
