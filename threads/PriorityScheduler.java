@@ -465,7 +465,7 @@ public class PriorityScheduler extends Scheduler {           // 우선순위 스
 		public long age = Machine.timer().getTime();  // Nachos 시간에 대하여, 현재 KThread 의 Aging 시간
 
 		/** a linkedlist representing all the waitqueues it is getting priority from.*/
-		protected LinkedList<PriorityThreadQueue> onQueues;     // Donation Queue 들을 Linked 구조로 연결
+		protected LinkedList<PriorityThreadQueue> onQueues;     // Donation Queue 들을 Linked 구조로 연결 (현재 KThread 에 의해 Holding 되고 있는 자원들에 대한 List)
 		protected int effectivePriority;                        // 현재 KThread 의 '실질적 우선순위'
 		protected PriorityThreadQueue waiting;                  // 현재 KThread 가 접근하기 위해 대기 중인 Priority Queue
 	}
