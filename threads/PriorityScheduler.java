@@ -358,9 +358,9 @@ public class PriorityScheduler extends Scheduler {           // 우선순위 스
 		}
 
 		/**
-		 * Set the priority of the associated thread to the specified value.
+		 *  현재 KThread 에 '기본적 우선순위' 값을 설정하소 동시에, EP 를 재계산
 		 *
-		 * @param priority the new priority.
+		 * @param priority 특정 KThread 에 부여할 '기본적 우선순위'
 		 */
 		public void setPriority(int priority) {
 			
