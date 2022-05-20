@@ -226,7 +226,7 @@ public class PriorityScheduler extends Scheduler {           // 우선순위 스
 			
 			if (transferPriority && threadState != null) {           // 
 				this.dequeuedThread.removeQueue(this);               // 해당 KThread 의 Scheduling 상태 정보에서, 해당 KThread 가 제거된 priorityQueue 를 제거
-				                                                     // 
+				threadState.acquire(this);                           // 해당 KThread 가 현재의 Priority Queue 에 대한 접근권한을 획득 
 				threadState.waiting = null;                          // 해당 KThread 가 Run 되도록 선택되었으므로, 기존에 준비 상태로 대기하고 있던 waiting Queue 에 대한 정보는 필요 없음 
 				threadState.addQueue(this);                          // 현재 상태의 priorityQueue 를 Donation Queue 리스트에 append
 			}
@@ -372,7 +372,11 @@ public class PriorityScheduler extends Scheduler {           // 우선순위 스
 			System.out.println(this.thread.getName()+" has "+this.getEffectivePriority()+" priority : "+Machine.timer().getTime());
 		}
 
-		
+		/** 
+		 * 해당 메소드는, 반드시 현재 KThread 가, 주어진 priorityQueue 와 관련있는 공유 자원에 즉시 접근이 불가능할 경우에만 호출되어야 함
+		 * @param waitQueue 현재 KThread가 접근을 하기 위해 대기하고 있는 PriorityThreadQueue 
+		 * @see nachos.threads.ThreadQueue#waitForAccess
+		 */
 		public void waitForAccess(PriorityThreadQueue waitQueue) {
 			Lib.assertTrue(Machine.interrupt().disabled());
 			// ---------- Aging Time 갱신 -----------
