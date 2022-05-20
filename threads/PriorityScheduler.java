@@ -389,7 +389,12 @@ public class PriorityScheduler extends Scheduler {           // 우선순위 스
 			this.calcEffectivePriority();      // 현재 KThread 의 EP 를 재계산
 		}
 
-		
+		/** 
+		 * 해당 메소드는, 반드시 현재 KThread 가, 주어진 priorityQueue 와 관련있는 공유 자원에 접근이 가능한 경우에 호출
+		 * (PriorityThreadQueue.acquire() 혹은, nextThread() 메소드에 의해서만 호출됨)
+		 * @param waitQueue 현재 KThread가 접근이 가능해진 PriorityThreadQueue 
+		 * @see nachos.threads.ThreadQueue#waitForAccess
+		 */
 		public void acquire(PriorityThreadQueue waitQueue) {
 			Lib.assertTrue(Machine.interrupt().disabled());
 			Lib.assertTrue(waitQueue.priorityQueue.isEmpty());          
