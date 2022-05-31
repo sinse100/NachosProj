@@ -328,7 +328,7 @@ public class PriorityScheduler extends Scheduler {           // 우선순위 스
 
 				for(int i = 0; i < size; i++){                                    // 
 					PriorityThreadQueue current = onQueues.get(i);
-					ThreadState donator = current.pickNextThread();               // 현재 Priority Queue 에서, 종합적 우선순위가 가장 높은 KThread의 Scheduling 상태 정보를 조회
+					ThreadState donator = current.pickNextThread();               // 현재 Priority Queue 에서, 종합적 우선순위(=스케쥴링 중요도)가 가장 높은 KThread의 Scheduling 상태 정보를 조회
 					if (donator != null){
 						if ((donator.getEffectivePriority() > maxEP) && current.transferPriority)   
 							maxEP = donator.getEffectivePriority();               // maxEP(실질적 우선순위의 최대치) 를, 양도자의 EP 로 설정
@@ -347,6 +347,9 @@ public class PriorityScheduler extends Scheduler {           // 우선순위 스
 			};
 			
 		}
+		
+		// 즉, 전체적으로, 우선순위 양도를, Lock 을 소유하고 있지 않은 KThread 들의 스케쥴링 중요도를 낮춤(우선순위 값을 높임)으로써,상대적으로 Lock 을 소유하고 있는 KThread 의 스케쥴링 중요도를 높이도록 함.
+		// 이로써, 우선순위가 상대적으로 양도되는 기능을 구현
 
 		/**
 		 * 해당 KThread 의 '실질적 우선순위'를 반환 
