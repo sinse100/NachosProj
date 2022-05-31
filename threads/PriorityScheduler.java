@@ -272,7 +272,7 @@ public class PriorityScheduler extends Scheduler {           // 우선순위 스
 
 		protected ThreadState dequeuedThread = null;  
 		// 가장 최근에 priorityQueue 에서 제거된 KThread 에 대한 Scheduling 상태 정보
-		// 가장 최근에 priorityQueue 에서 제거된 KThread(가장 최근에 실행된 KThread)는 공유자원에 대한 Lock 을 소유하고 있다고 가정함
+		// 가장 최근에 priorityQueue 에서 제거된 KThread(가장 최근에 실행된 KThread)는 공유자원에 대한 Lock 을 얻어,소유하게 됨
 
 		// 우선순위 양도가 가능한지 여부를 나타내는 상태 변수 정의
 		public boolean transferPriority;
@@ -397,18 +397,18 @@ public class PriorityScheduler extends Scheduler {           // 우선순위 스
 		 */
 		public void acquire(PriorityThreadQueue waitQueue) {
 			Lib.assertTrue(Machine.interrupt().disabled());
-			Lib.assertTrue(waitQueue.priorityQueue.isEmpty());          
-			
-			waitQueue.priorityQueue.remove(this);
-			waitQueue.dequeuedThread = this;                            // priorityQueue(waitQueue) 에서 막 제거된 KThread를, 현재 KThread(waitQueue 에 대한 접근을 허락받은 KThread) 로 설정 
-			this.addQueue(waitQueue);                                   // 현재 상태의 priorityQueue(waitQueue) 를, onQueues에 추가
-			this.calcEffectivePriority();                               // 현재 KThread 의 EP 를 재 계산
+			Lib.assertTrue(waitQueue.priorityQueue.isEmpty());          // 현재 waitQueue(Priority Thread Queue) 에 존재하는 그 어떠한 KThread 가 없다는 것을 확인       
+			                                                            // 그래야 바로 공유 자원에 접근할 수 있으므로!!
+			//waitQueue.priorityQueue.remove(this);
+			waitQueue.dequeuedThread = this;                            // 현재 공유자원(waitQueue가 접근을 관리하는!!)에 대한 Lock 을 얻은 KThread 는 this KThread! 
+			this.addQueue(waitQueue);                                   // 현재 상태의 priorityQueue(waitQueue) 를, onQueues에 추가 (다른 KThread 가 this KThread 가 가지고 있는 Lock 을 요청할 수도 있기 때문!)
+			this.calcEffectivePriority();                               // 현재 KThread 의 EP 를 재계산
 		}
 
 
 		/*
 		두개의 ThreadState(Scheduling 상태 정보)를 어떤 기준으로 비교할 것인가?
-		* => 실질적 우선순위를 비교 (실질적 우선순위가 더 높은 KThread 가, 최종 우선순위가 가장 높음)
+		* => 실질적 우선순위를 비교 (실질적 우선순위가 더 높은 KThread 가, 최종(Final) 우선순위가 가장 높음)
 		* => 만일, 두 KThread 의 실질적 우선순위가 같은 경우, 두 KThread 의 Aging Time을 기반으로 하여 비교 
 		*    (Aging 이 더 오래된 KThread 가, 최종 우선순위가 가장 높음)
 		*/
@@ -425,7 +425,7 @@ public class PriorityScheduler extends Scheduler {           // 우선순위 스
 
 			if (this.getEffectivePriority() < threadState.getEffectivePriority()){
 				return 1;                                // this KThread 의 우선순위가, 특정 Kthread 의 우선순위보다 높음
-			}
+			}                                                // EP 값은 필히, 더 작은 것이 우선순위가 
 			else{ 
 				if (this.getEffectivePriority() > threadState.getEffectivePriority()){
 					return -1;                           // this KThread 의 우선순위가, 특정 Kthread 의 우선순위보다 낮음
@@ -514,6 +514,6 @@ Nachos의 모든 종류의 스케쥴러는, 반드시, nachos.threads.Scheduler 
 이번 과제에서는, 본 PriorityScheduler 클래스 외의 클래스(ex : Lock)는 수정하시면 안됩니다.
 
 이번 과제 역시, 난이도를 낮추기 위해, 조교들이 구현한 코드를 제공토록하겠습니다. 이전 과제처럼, 여러분들은 \* 채우세요 *\ 부분을 채우시면 됩니다. 몇가지 추가적으로 말씀드리자면,
-1. 과제 설명에서는,  increasePriority(), decreasePriority() 메소드를 선택적으로 구현하라 했으나, 첨부한 조교들의 코드는, increasePriority(), decreasePriority() 메소드ㄹ가 구현되어 있습니다.
+1. 과제 설명에서는,  increasePriority(), decreasePriority() 메소드를 선택적으로 구현하라 했으나, 첨부한 조교들의 코드는, increasePriority(), decreasePriority() 메소드가 구현되어 있습니다.
 2. 우선순위 역전 현상과 관련해서는 다음의 글(http://blog.skby.net/%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84-%EC%97%AD%EC%A0%84-%ED%98%84%EC%83%81/)을 참고하세요.
  */
